@@ -28,11 +28,12 @@ SECRET_KEY =\
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost','https://tsprao-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/'
-]
+ALLOWED_HOSTS = ['*']
+
 CSRF_TRUSTED_ORIGINS = [
-    'https://tsprao-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/'
+    'https://*.proxy.cognitiveclass.ai',
+    'https://*.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai',
+    'https://*.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai',
 ]
 
 REST_FRAMEWORK = {
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -66,7 +68,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR,'frontend/static')
+            os.path.join(BASE_DIR, 'frontend/static'),
+            os.path.join(BASE_DIR, 'frontend/build'),
+            os.path.join(BASE_DIR, 'frontend/build/static'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -140,7 +144,11 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+plaintext
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'frontend/static')
+    os.path.join(BASE_DIR, 'frontend/static'),
+	os.path.join(BASE_DIR, 'frontend/build'),
+	os.path.join(BASE_DIR, 'frontend/build/static'),
 ]
 
