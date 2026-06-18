@@ -32,8 +32,14 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://*.proxy.cognitiveclass.ai',
-    'https://*.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai',
-    'https://*.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai',
+    (
+        'https://*.theianext-0-labs-prod-misc-tools-us-east-0.'
+        'proxy.cognitiveclass.ai'
+    ),
+    (
+        'https://*.theianext-1-labs-prod-misc-tools-us-east-0.'
+        'proxy.cognitiveclass.ai'
+    ),
 ]
 
 REST_FRAMEWORK = {
@@ -101,7 +107,8 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME':
-        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+            'django.contrib.auth.password_validation.'
+            'UserAttributeSimilarityValidator'
     },
     {
         'NAME':
@@ -147,8 +154,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/static'),
-	os.path.join(BASE_DIR, 'frontend/build'),
-	os.path.join(BASE_DIR, 'frontend/build/static'),
+    os.path.join(BASE_DIR, 'frontend/build'),
+    os.path.join(BASE_DIR, 'frontend/build/static'),
     os.path.join(BASE_DIR, 'frontend/public')
 ]
-
