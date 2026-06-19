@@ -17,6 +17,7 @@ mongoose.connect("mongodb://mongo_db:27017/",{'dbName':'dealershipsDB'});
 const Reviews = require('./review');
 
 const Dealerships = require('./dealership');
+const dealership = require('./dealership');
 
 try {
   Reviews.deleteMany({}).then(()=>{
@@ -48,14 +49,21 @@ app.get('/fetchReviews', async (req, res) => {
 
 // Express route to fetch reviews by a particular dealer
 app.get('/fetchReviews/dealer/:id', async (req, res) => {
-  try {
-    const dealerID = parseInt(req.params.id);
-    const documents = await Reviews.find({id: dealerID});
-    res.json(documents);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching documents' });
-  }
-});
+    try {
+      const dealerID = parseInt(req.params.id);
+  
+      console.log("Dealer requested:", dealerID);
+  
+      const documents = await Reviews.find({ dealership: dealerID });
+  
+      console.log("Documents found:", documents);
+  
+      res.json(documents);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Error fetching documents' });
+    }
+  });
 
 // Express route to fetch all dealerships
 // Express route to fetch all dealerships
@@ -113,7 +121,7 @@ app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
 		"dealership": data.dealership,
 		"review": data.review,
 		"purchase": data.purchase,
-		"purchase_date": data.purchase_data,
+		"purchase_date": data.purchase_date,
 		"car_make": data.car_make,
 		"car_model": data.car_model,
 		"car_year": data.car_year,

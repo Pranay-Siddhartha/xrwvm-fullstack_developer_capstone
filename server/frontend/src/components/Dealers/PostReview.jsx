@@ -5,10 +5,6 @@ import "../assets/style.css";
 import Header from '../Header/Header';
 
 
-
-
-
-
 const PostReview = () => {
   const [dealer, setDealer] = useState({});
   const [review, setReview] = useState("");
@@ -53,17 +49,20 @@ const PostReview = () => {
 
     console.log(jsoninput);
     const res = await fetch(review_url, {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: jsoninput,
-  });
-
-  const json = await res.json();
-  if (json.status === 200) {
-      window.location.href = window.location.origin+"/dealer/"+id;
-  }
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: jsoninput,
+    });
+    
+    const json = await res.json();
+    console.log(json);
+    
+    if (res.ok) {
+        window.location.href = window.location.origin + "/dealer/" + id;
+    }
 
   }
   const get_dealer = async () => {

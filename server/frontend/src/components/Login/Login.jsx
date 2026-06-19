@@ -14,16 +14,17 @@ const Login = ({ onClose }) => {
   const login = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(login_url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            "userName": userName,
-            "password": password
-        }),
-    });
+const res = await fetch(login_url, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        userName: userName,
+        password: password
+    }),
+});
     
     const json = await res.json();
     if (json.status != null && json.status === "Authenticated") {
